@@ -1,0 +1,26 @@
+#miner{
+    border: 2px solid black;
+    display: inline-block;
+    position: relative;
+    width: 270px;
+    margin-left: 37%;
+}
+
+.cells{
+    border: 1px solid black;
+    display: inline-block; 
+    width: 25px; 
+    height: 25px;
+    float: left;
+    background-color: gray;
+}
+
+.openedCells{
+    background-color: white; 
+}
+
+.bombCells{ 
+    background-image: url("images/bomb.png");
+    background-repeat: no-repeat;
+    background-position: center;
+}
