@@ -6,6 +6,7 @@ var CELLNUMBER = FIELD_HEIGHT * FIELD_WIDTH;
 var BOMBNUMBER = Math.round(CELLNUMBER * 0.15);
 var MAX_FIELD_SIZE = Math.round(CELLNUMBER * 0.2);
 var cells;
+var bombsTargeted;
 
 var CONTENT_TYPES = {
     EMPTY: 0,
@@ -40,13 +41,19 @@ function initCells(){
         cell.className = "cells";
         cell.id = c.id;
         cell.onclick = openCell;
+        cell.addEventListener("contextmenu", function(event) {      //right click
+            event.preventDefault();
+            flagCell(event);
+            return false;
+        }, false);      // cancel default menu
+
         container.appendChild(cell);
     });
 }
 
 function initBombs(){
     for (var i=0; i < BOMBNUMBER; i++){
-        var randomId = Math.floor(Math.random() * (CELLNUMBER-1));          //from 0 to 99
+        var randomId = Math.floor(Math.random() * (CELLNUMBER-1));      //from 0 to 99
         if (cells[randomId].contentType === CONTENT_TYPES.BOMB){
             i--;
             continue;
@@ -54,6 +61,7 @@ function initBombs(){
             cells[randomId].contentType = CONTENT_TYPES.BOMB;
         }
     } 
+    bombsTargeted = BOMBNUMBER;
 }
 
 function initNumbers(){
@@ -116,7 +124,10 @@ function getCellNeighbours(cellId){
 }
 
 function openCell(event){
+    
+   
     var target = event.currentTarget;
+    target.onclick = undefined;
     var cell = cells[target.id];
     
     cell.isClosed = false;
@@ -124,7 +135,7 @@ function openCell(event){
     switch(cell.contentType){
         case CONTENT_TYPES.BOMB: {
             showBombs();
-            //finishGame()
+            setTimeout(finishGame, 1);
             break;
         }
         case CONTENT_TYPES.NUMBER: {
@@ -136,14 +147,32 @@ function openCell(event){
             break;
         }
     }
+    
+    if (isWin()){
+        finishGame();
+    }
 }
 
-function flagCell(){
+function flagCell(event){
+    var target = event.currentTarget;
+    var cell = cells[target.id];
     
+    if (!cell.isClosed){
+        return;
+    }
+    
+    if (cell.isFlaged === true){
+        cell.isFlaged = false;
+        target.className = "cells";
+        bombsTargeted--;
+    } else {
+        cell.isFlaged = true;
+        target.className = "cells flagCells";
+        bombsTargeted++;
+    }
 }
 
 function showBombs(){
-    
     cells.filter(function(c){
         return c.contentType === CONTENT_TYPES.BOMB;
     }).forEach(function(c){
@@ -157,7 +186,44 @@ function showNumber(cell){
     
     var target = document.getElementById(cell.id);
     target.innerHTML = cell.content;
-    target.className = "cells openedCells";
+    
+    var cellClass = "cells openedCells ";
+    
+    switch(cell.content){
+        case 1: 
+            cellClass = cellClass.concat("oneCell");
+            break;
+        
+        case 2: 
+            cellClass = cellClass.concat("twoCell");
+            break;
+            
+        case 3: 
+            cellClass = cellClass.concat("threeCell");
+            break;
+            
+        case 4: 
+            cellClass = cellClass.concat("fourCell");
+            break;
+            
+        case 5: 
+            cellClass = cellClass.concat("fiveCell");
+            break;    
+        
+        case 6: 
+            cellClass = cellClass.concat("sixCell");
+            break;    
+        
+        case 7: 
+            cellClass = cellClass.concat("sevenCell");
+            break;    
+        
+        case 8: 
+            cellClass = cellClass.concat("eightCell");
+            break;
+    }
+    
+    target.className = cellClass;
 }
 
 function showEmptyCell(cellId, processedEmptyCells){
@@ -184,4 +250,44 @@ function showEmptyCell(cellId, processedEmptyCells){
             showEmptyCell(n.id, processedEmptyCells);
         }
     });
+}
+
+function isWin(){
+    
+    var otherCells = cells.filter(function(c){
+        return c.contentType !== CONTENT_TYPES.BOMB;
+    }).every(function(c){
+        return !c.isClosed;
+    });
+    
+    return otherCells;
+}
+
+function finishGame(){
+    var container = document.getElementById("miner");
+    var containerChildren = container.childNodes;
+    [].forEach.call(containerChildren, function(c){
+        c.onclick = undefined;                  //delete c.onclick is not working
+    });
+    
+    var resultMessage = isWin() ? "You won!" : "You lose :(";
+    
+    if (confirm(resultMessage + " Do you want to start new game?")){
+        reloadGame(); 
+    };
+}
+
+function reloadGame(){
+    var container = document.getElementById("miner");
+    
+    cells.forEach(function(c){
+        var cell = document.getElementById(c.id);
+        container.removeChild(cell);
+    });
+    
+    initField();
+}
+
+function onNewBtnClick(event){
+    reloadGame();
 }

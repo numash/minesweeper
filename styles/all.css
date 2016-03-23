@@ -3,7 +3,8 @@
     display: inline-block;
     position: relative;
     width: 270px;
-    margin-left: 37%;
+    margin-left: 39%;
+    border-radius: 5px;
 }
 
 .cells{
@@ -12,7 +13,47 @@
     width: 25px; 
     height: 25px;
     float: left;
-    background-color: gray;
+    
+    border-radius: 3px;
+    cursor: pointer;
+    overflow: hidden;
+    text-align: center;
+    transition: all 200ms ease-in-out 0s;
+    white-space: nowrap;
+    
+    background-color: #C6CCD2;
+    border-color: #AAB3BB;
+    
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.oneCell{
+    color: green;
+}
+
+.twoCell{
+    color: red;
+}
+
+.threeCell{
+    color: blue;   
+}
+
+.fourCell{
+    color: orange;
+}
+
+.sixCell{
+    color: green;
+}
+
+.sevenCell{
+    color: red;
+}
+
+.eightCell{
+    color: blue;
 }
 
 .openedCells{
@@ -23,4 +64,32 @@
     background-image: url("images/bomb.png");
     background-repeat: no-repeat;
     background-position: center;
+}
+
+.flagCells{
+    background-image: url("images/flag.png");
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+span {
+    position: absolute;
+    bottom: 0px;
+    font-family: "Libre Baskerville", serif;
+    font-size: 18px;
+    margin-bottom: 0px;
+    text-shadow: 0 1px 1px #fff;
+}
+
+p{
+    color: black;
+    font-family: 'Lato', sans-serif; 
+    font-size: 50px; 
+    font-weight: 300; 
+    line-height: 58px; 
+    margin: 0 0 20px;
+    text-align: center;
+}
+.buttons{
+    margin-left: 46%;
 }
