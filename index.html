@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+	<meta charset="utf-8" author="Masha Malyschenko"/>
+	<head>
+		<title>Minesweeper</title>		
+		<link rel="stylesheet" type="text/css" href="styles/all.css">
+		<script type="text/javascript" src="scripts/script.js"></script>
+	</head>
+	<body onload="initField()" align="center">
+		<p>Minesweeper</p>
+		<div id="miner"></div>
+		<div id="bombsCounter">
+			<img src="styles/images/bomb.png">
+			<span id="counterNumber">14</span>
+		</div>
+		<div class="buttons"><button id="newGameBtn" onclick="onNewBtnClick(event)">NEW GAME</button></div>
+		<span id = "name" style="right: 10px">&copy;numash</span>
+	</body>
+</html>
