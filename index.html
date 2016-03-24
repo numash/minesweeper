@@ -6,10 +6,14 @@
 		<link rel="stylesheet" type="text/css" href="styles/all.css">
 		<script type="text/javascript" src="scripts/script.js"></script>
 	</head>
-	<body onload="initField()">
+	<body onload="initField()" align="center">
 		<p>Minesweeper</p>
 		<div id="miner"></div>
+		<div id="bombsCounter">
+			<img src="styles/images/bomb.png">
+			<span id="counterNumber">14</span>
+		</div>
 		<div class="buttons"><button id="newGameBtn" onclick="onNewBtnClick(event)">NEW GAME</button></div>
-		<span style="right: 10px">&copy;numash</span>
+		<span id = "name" style="right: 10px">&copy;numash</span>
 	</body>
 </html>

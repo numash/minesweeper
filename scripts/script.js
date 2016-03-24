@@ -62,6 +62,9 @@ function initBombs(){
         }
     } 
     bombsTargeted = BOMBNUMBER;
+    
+    var counterNumber = document.getElementById("counterNumber");
+    counterNumber.innerHTML = bombsTargeted;
 }
 
 function initNumbers(){
@@ -157,6 +160,8 @@ function flagCell(event){
     var target = event.currentTarget;
     var cell = cells[target.id];
     
+    var counterNumber = document.getElementById("counterNumber");
+    
     if (!cell.isClosed){
         return;
     }
@@ -164,11 +169,11 @@ function flagCell(event){
     if (cell.isFlaged === true){
         cell.isFlaged = false;
         target.className = "cells";
-        bombsTargeted--;
+        counterNumber.innerHTML = ++bombsTargeted;
     } else {
         cell.isFlaged = true;
         target.className = "cells flagCells";
-        bombsTargeted++;
+        counterNumber.innerHTML = --bombsTargeted;
     }
 }
 

@@ -3,7 +3,6 @@
     display: inline-block;
     position: relative;
     width: 270px;
-    margin-left: 39%;
     border-radius: 5px;
 }
 
@@ -72,15 +71,6 @@
     background-position: center;
 }
 
-span {
-    position: absolute;
-    bottom: 0px;
-    font-family: "Libre Baskerville", serif;
-    font-size: 18px;
-    margin-bottom: 0px;
-    text-shadow: 0 1px 1px #fff;
-}
-
 p{
     color: black;
     font-family: 'Lato', sans-serif; 
@@ -90,6 +80,30 @@ p{
     margin: 0 0 20px;
     text-align: center;
 }
-.buttons{
-    margin-left: 46%;
+
+#newGameBtn{
+    cursor: pointer;
+    margin: 10px;
+    border-radius: 5px;
+    text-decoration: none;
+    padding: 10px;
+    font-size: 20px;
+    display: inline-block;
+    
+    color: #55acee;
+    border: 2px #55acee solid;
+}
+
+#newGameBtn:hover {
+    background-color: #55acee;
+    color: #fff
+}
+
+#name {
+    position: absolute;
+    bottom: 0px;
+    font-family: "Libre Baskerville", serif;
+    font-size: 18px;
+    margin-bottom: 0px;
+    text-shadow: 0 1px 1px #fff;
 }
